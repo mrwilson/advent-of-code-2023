@@ -1,5 +1,5 @@
 include "day_00";
-include "test";
+include "assert";
 
 def should_double_inputs:
     2 | double | assert("2 * 2 = 4"; . == 4);
