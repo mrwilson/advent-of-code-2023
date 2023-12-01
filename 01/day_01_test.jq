@@ -27,7 +27,14 @@ def should_correct_calibration_values:
 def should_replace_words_with_numbers: (
     "onetwothreefourfivesixseveneightnine"
         | replace_words_with_numbers
-        | assert("Replaced value should be 123456789, was \(.)"; . == "123456789")
+        | assert("Replaced value should be 123456789, was \(.)"; . == "o1et2ot3ef4rf5es6xs7ne8tn9e")
+);
+
+def should_allow_for_overlapping_numbers: (
+    "eightwoneight"
+        | replace_words_with_numbers
+        | calibration
+        | assert("Replaced value should be 88, was \(.)"; . == 88)
 );
 
 def should_correct_calibration_values_part_2: (
