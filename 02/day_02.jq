@@ -14,3 +14,6 @@ def game_power:
 
 def part1:
     [inputs | parse | enforce_cube_limit | .game] | add;
+
+def part2:
+    [inputs | parse | game_power | .green * .red * .blue ] | add;
