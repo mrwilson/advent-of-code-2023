@@ -5,3 +5,6 @@ def parse: (
         "reveals" : ($reveals/"; "  | map(./", " | map(./" ") | map({ "\(last)": (first | tonumber) }) | reduce .[] as $item ({} ; . * $item)))
     }
 );
+
+def enforce_cube_limit:
+    select(.reveals | all(.red <= 12 and .green <= 13 and .blue <= 14));
