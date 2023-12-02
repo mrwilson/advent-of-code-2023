@@ -30,3 +30,10 @@ def should_parse_input_with_reveals: (
 def should_exclude_games_with_too_many_cubes: (
     [ test_input | parse | enforce_cube_limit | .game ] | assert("Should only allow legal games"; . == [1,2,5])
 );
+
+def should_calculate_game_power: (
+    "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
+        | parse
+        | game_power
+        | assert("Should calculate game power as minimum of cubes"; . == { "green": 2, "blue": 6, "red": 4 })
+);
