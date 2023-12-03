@@ -78,3 +78,6 @@ def should_find_parts_nearby_gears:
        [1,3],[8,5]
    ]);
 
+def should_calculate_sum_of_gear_ratios:
+   [ test_input | parse ] | sum_of_gear_ratios | assert("Should calculate gear ratios"; . == 467835);
+

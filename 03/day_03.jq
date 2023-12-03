@@ -55,5 +55,9 @@ def parts_nearby_gears: (
     | map(select(.parts | length == 2))
 );
 
+def sum_of_gear_ratios: (
+    . as $grid | parts_nearby_gears | map([.parts[] | reverse_value_lookup($grid)]) | map(.[0] * .[1]) | add
+);
+
 def part1:
     [inputs | parse] | values_for_part_numbers;
