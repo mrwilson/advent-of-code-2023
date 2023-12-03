@@ -43,3 +43,6 @@ def values_for_part_numbers: (
     | [ .[] | reverse_value_lookup($grid)]
     | add
 );
+
+def part1:
+    [inputs | parse] | values_for_part_numbers;
