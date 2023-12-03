@@ -50,16 +50,20 @@ def should_extract_list_of_digits_for_part_numbers:
 );
 
 def should_test_for_adjacency_to_symbol: (
-    [[0,0],[0,1],[0,2]] | is_adjacent_to([[1,3],[5,5]]) | assert("Should be adjacent"; . == true)
+    [[2,6],[2,7],[2,8]] | is_adjacent_to([[3,6],[5,5]]) | assert("Should be adjacent"; . == true)
 );
 
 def should_test_for_lack_of_adjacency_to_symbol: (
-    [[5,7],[5,8]] | is_adjacent_to([[1,3],[5,5]]) | assert("Should not be adjacent"; . == false)
+    [[5,7],[5,8]] | is_adjacent_to([[3,6],[5,5]]) | assert("Should be adjacent"; . == false)
 );
 
 def should_reverse_value_lookup: (
-    (test_input | parse) as $grid
+    [ test_input | parse ] as $grid
         | [[0,0],[0,1],[0,2]]
         | reverse_value_lookup($grid)
         | assert("Should retrieve original value"; . == 467)
+);
+
+def should_make_a_leap: (
+    [ test_input | parse ] | values_for_part_numbers | assert("Should sum up part value numbers"; . == 4361)
 );
