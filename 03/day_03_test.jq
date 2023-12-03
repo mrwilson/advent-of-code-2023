@@ -28,3 +28,8 @@ def should_transform_input_to_grid: (
         [null,6,6,4,null,5,9,8,null,null]
     ])
 );
+
+def should_extract_coordinates_of_symbols:
+    [ [ test_input | parse ] | symbols ] | assert("Should get coordinates of symbols"; . == [
+        [1,3],[3,6],[4,3],[5,5],[8,3],[8,5]
+    ]);
