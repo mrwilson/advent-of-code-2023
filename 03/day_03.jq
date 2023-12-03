@@ -61,3 +61,6 @@ def sum_of_gear_ratios: (
 
 def part1:
     [inputs | parse] | values_for_part_numbers;
+
+def part2:
+    [inputs | parse] | sum_of_gear_ratios;
