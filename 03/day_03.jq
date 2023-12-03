@@ -1,3 +1,5 @@
+include "utils";
+
 def parse: (
     ./"" | map(. as $original | try tonumber catch (if $original == "." then null elif $original == "*" then -2 else -1 end))
 );
@@ -39,7 +41,7 @@ def values_for_part_numbers: (
     . as $grid
     | [symbols] as $symbols
     | part_numbers
-    | map(select(is_adjacent_to($symbols)))
+    | filter(is_adjacent_to($symbols))
     | map(reverse_value_lookup($grid))
     | add
 );
@@ -53,9 +55,9 @@ def parts_nearby_gears: (
     | [gears]
     | map(. as $gear | {
         gear: $gear,
-        parts: ($parts | map(select(any([flatten(1)] | is_adjacent_to([$gear])))))
+        parts: ($parts | filter(any([flatten(1)] | is_adjacent_to([$gear]))))
     })
-    | map(select(.parts | length == 2))
+    | filter(.parts | length == 2)
 );
 
 def sum_of_gear_ratios: (
