@@ -1,5 +1,5 @@
 def parse: (
-    ./"" | map(. as $original | try tonumber catch (if $original == "." then null else -1 end))
+    ./"" | map(. as $original | try tonumber catch (if $original == "." then null elif $original == "*" then -2 else -1 end))
 );
 
 def symbols:
@@ -43,6 +43,9 @@ def values_for_part_numbers: (
     | [ .[] | reverse_value_lookup($grid)]
     | add
 );
+
+def gears:
+    paths(numbers == -2);
 
 def part1:
     [inputs | parse] | values_for_part_numbers;
