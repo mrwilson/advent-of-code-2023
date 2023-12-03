@@ -29,3 +29,6 @@ def neighbours($x; $y):
 
 def is_adjacent_to($symbols):
     map(neighbours(.[0]; .[1])) | flatten(1) | unique | any([.] | inside($symbols));
+
+def reverse_value_lookup($grid):
+    [.[] as $coordinate | [$grid] | getpath($coordinate) ] | 100*.[-3] + 10*.[-2] + .[-1];

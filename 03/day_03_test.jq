@@ -56,3 +56,10 @@ def should_test_for_adjacency_to_symbol: (
 def should_test_for_lack_of_adjacency_to_symbol: (
     [[0,0],[0,1],[0,2]] | is_adjacent_to([[9,9]]) | assert("Should be adjacent"; . == false)
 );
+
+def should_reverse_value_lookup: (
+    (test_input | parse) as $grid
+        | [[0,0],[0,1],[0,2]]
+        | reverse_value_lookup($grid)
+        | assert("Should retrieve original value"; . == 467)
+);
