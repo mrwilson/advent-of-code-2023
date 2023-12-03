@@ -23,9 +23,11 @@ def part_numbers: (
 );
 
 def neighbours($x; $y):
-    [[$x, $y],[$x-1, $y],[$x+1, $y],
-    [$x, $y-1],[$x, $y+1],[$x, $y],
-    [$x-1, $y-1],[$x+1, $y+1],[$x, $y]];
+    [
+        [$x-1, $y-1], [$x-1, $y], [$x-1, $y+1],
+        [$x,   $y-1], [$x,   $y], [$x,   $y+1],
+        [$x+1, $y-1], [$x+1, $y], [$x+1, $y+1]
+    ];
 
 def is_adjacent_to($symbols):
     map(neighbours(.[0]; .[1])) | flatten(1) | unique | any([.] | inside($symbols));
