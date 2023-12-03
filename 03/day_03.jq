@@ -47,5 +47,13 @@ def values_for_part_numbers: (
 def gears:
     paths(numbers == -2);
 
+def parts_nearby_gears: (
+    . as $grid
+    | part_numbers as $parts
+    | [gears]
+    | map(. as $gear | { gear: $gear, parts: ($parts | map(select(any(flatten(1) | [.] | is_adjacent_to([$gear])))))})
+    | map(select(.parts | length == 2))
+);
+
 def part1:
     [inputs | parse] | values_for_part_numbers;

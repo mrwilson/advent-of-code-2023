@@ -73,3 +73,8 @@ def should_extract_coordinates_of_gears:
         [1,3],[4,3],[8,5]
     ]);
 
+def should_find_parts_nearby_gears:
+   [ test_input | parse ] | parts_nearby_gears | map(.gear) | assert("Should get coordinates of gears"; . == [
+       [1,3],[8,5]
+   ]);
+
