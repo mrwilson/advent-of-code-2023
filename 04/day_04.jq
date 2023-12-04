@@ -36,3 +36,6 @@ def count_copies: (
 
 def part1:
     [inputs | parse ] | scores_for_cards | add;
+
+def part2:
+    [inputs | parse ] | matches_for_cards | count_copies;
