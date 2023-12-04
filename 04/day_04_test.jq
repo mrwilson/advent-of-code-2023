@@ -18,3 +18,10 @@ def should_parse_line_with_card_numbers: (
         | parse
         | assert("Should parse scratchcard"; .card_numbers == [83,86,6,31,17,9,48,53])
 );
+
+def should_get_matching_numbers: (
+    "Card    1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53"
+        | parse
+        | matching_numbers
+        | assert("Should identify matching numbers"; . == [17,48,83,86])
+);

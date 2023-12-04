@@ -4,3 +4,11 @@ def parse: (
         | .winning_numbers |= (./" " | map(tonumber))
         | .card_numbers |= (split(" +"; null) | map(tonumber))
 );
+
+def matching_numbers: (
+    .winning_numbers as $winning_numbers
+        | .card_numbers
+        | map([.] | select(inside($winning_numbers)))
+        | flatten
+        | sort
+);
