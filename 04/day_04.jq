@@ -18,7 +18,20 @@ def scores_for_cards: (
 );
 
 def matches_for_cards: (
-    { scores: map(matching_numbers | length), copies: map(1) }
+    map({ id: .id, score: matching_numbers | length, copies: 1 })
+);
+
+def make_copies($id; $cards; $updates): (
+    ($cards | map(select(.id == $id)) | first | .copies) as $copies |
+        reduce $updates[] as $u ($cards; setpath([$u-1, "copies"]; getpath([$u-1,"copies"]) + $copies))
+);
+
+def count_copies: (
+    . as $scores
+    | map({id: .id, copies: [range(.id+1;.id+.score+1)]})
+    | reduce .[] as $card ($scores; . as $s2 | $card | make_copies(.id; $s2; .copies))
+    | map(.copies)
+    | add
 );
 
 def part1:

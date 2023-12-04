@@ -44,7 +44,35 @@ def should_get_scores_for_all_cards: (
 def should_aggregate_matching_numbers_for_cards: (
     [ test_input | parse ]
         | matches_for_cards
-        | assert("Should aggregate"; . == {"scores":[4,2,2,1,0,0], copies: [1,1,1,1,1,1]}
-)
+        | assert("Should aggregate"; . == [
+            {"id":1,"score":4,"copies":1},
+            {"id":2,"score":2,"copies":1},
+            {"id":3,"score":2,"copies":1},
+            {"id":4,"score":1,"copies":1},
+            {"id":5,"score":0,"copies":1},
+            {"id":6,"score":0,"copies":1}
+        ])
+);
+
+def should_make_copies: (
+    make_copies(1; [
+        {"id":1,"score":4,"copies":1}, {"id":2,"score":2,"copies":1}, {"id":3,"score":2,"copies":1},
+        {"id":4,"score":1,"copies":1}, {"id":5,"score":0,"copies":1}
+    ]; [2,3,4,5])
+        | assert("Should make copies"; . == [
+            {"id":1,"score":4,"copies":1},
+            {"id":2,"score":2,"copies":2},
+            {"id":3,"score":2,"copies":2},
+            {"id":4,"score":1,"copies":2},
+            {"id":5,"score":0,"copies":2}
+        ])
+);
+
+
+def should_count_the_number_of_scratch_cards: (
+    [ test_input | parse ] | matches_for_cards | count_copies
+     | assert("Should count copies"; . == 30)
 
 );
+
+
