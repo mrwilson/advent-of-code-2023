@@ -1,3 +1,5 @@
+include "utils";
+
 def parse: (
     capture("Card +(?<id>[0-9]+): +(?<winning_numbers>[0-9 ]+) \\| +(?<card_numbers>[0-9 ]+)")
         | .id |= tonumber
@@ -8,7 +10,7 @@ def parse: (
 def matching_numbers: (
     .winning_numbers as $winning_numbers
         | .card_numbers
-        | map([.] | select(inside($winning_numbers)))
+        | filter([.] | inside($winning_numbers))
         | flatten
         | sort
 );
