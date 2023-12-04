@@ -40,3 +40,11 @@ def should_get_scores_for_all_cards: (
         | scores_for_cards
         | assert("Should score all cards"; . == [8,2,2,1,0,0])
 );
+
+def should_aggregate_matching_numbers_for_cards: (
+    [ test_input | parse ]
+        | matches_for_cards
+        | assert("Should aggregate"; . == {"scores":[4,2,2,1,0,0], copies: [1,1,1,1,1,1]}
+)
+
+);
