@@ -79,3 +79,7 @@ def should_take_next_step_for_all_seeds: (
     [test_input] | parse | .maps as $maps
         | .seeds | map(next(.; $maps.soil)) | assert("Should take next step for all seeds"; . == [81,14,57,13])
 );
+
+def should_find_locations: (
+    [test_input] | parse | find_locations | assert("Should take next step for all seeds"; . == [82,43,86,35])
+);

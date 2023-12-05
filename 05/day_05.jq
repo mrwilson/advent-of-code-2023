@@ -16,3 +16,15 @@ def next($value; $map): (
     | filter( .src <= $value and $value <= (.src + .len))
     | first | if . == null then $value else .dst + ($value - .src) end
 );
+
+def find_locations: (
+    .maps as $map
+    | .seeds
+    | map(next(.;$map.soil))
+    | map(next(.;$map.fertilizer))
+    | map(next(.;$map.water))
+    | map(next(.;$map.light))
+    | map(next(.;$map.temperature))
+    | map(next(.;$map.humidity))
+    | map(next(.;$map.location))
+);
