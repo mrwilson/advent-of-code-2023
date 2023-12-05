@@ -70,3 +70,12 @@ def should_parse_maps_from_input: (
             ]
         })
 );
+
+def should_take_next_step: (
+    [test_input] | parse | next(.seeds[0]; .maps.soil) | assert("Should take next step"; . == 81)
+);
+
+def should_take_next_step_for_all_seeds: (
+    [test_input] | parse | .maps as $maps
+        | .seeds | map(next(.; $maps.soil)) | assert("Should take next step for all seeds"; . == [81,14,57,13])
+);
