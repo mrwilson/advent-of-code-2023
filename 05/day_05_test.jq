@@ -42,3 +42,31 @@ def should_parse_seeds_from_input: (
         | parse
         | assert("Should extract seeds"; .seeds == [79,14,55,13])
 );
+
+def should_parse_maps_from_input: (
+    [ test_input ]
+        | parse
+        | assert("Should extract maps"; .maps == {
+            "soil":[
+                {"dst":50,"src":98,"len":2},{"dst":52,"src":50,"len":48}
+            ],
+            "fertilizer":[
+                {"dst":0,"src":15,"len":37},{"dst":37,"src":52,"len":2},{"dst":39,"src":0,"len":15}
+            ],
+            "water":[
+                {"dst":49,"src":53,"len":8},{"dst":0,"src":11,"len":42},{"dst":42,"src":0,"len":7},{"dst":57,"src":7,"len":4}
+            ],
+            "light":[
+                {"dst":88,"src":18,"len":7},{"dst":18,"src":25,"len":70}
+            ],
+            "temperature":[
+                {"dst":45,"src":77,"len":23},{"dst":81,"src":45,"len":19},{"dst":68,"src":64,"len":13}
+            ],
+            "humidity":[
+                {"dst":0,"src":69,"len":1},{"dst":1,"src":0,"len":69}
+            ],
+            "location":[
+                {"dst":60,"src":56,"len":37},{"dst":56,"src":93,"len":4}
+            ]
+        })
+);
