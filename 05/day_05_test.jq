@@ -40,7 +40,13 @@ def test_input: (
 def should_parse_seeds_from_input: (
     [ test_input ]
         | parse
-        | assert("Should extract seeds"; .seeds == [79,14,55,13])
+        | assert("Should extract seeds"; .seeds == [
+            { src: 79, len: 1 },
+            { src: 14, len: 1 },
+            { src: 55, len: 1 },
+            { src: 13, len: 1 }
+        ])
+
 );
 
 def should_parse_maps_from_input: (
@@ -72,12 +78,17 @@ def should_parse_maps_from_input: (
 );
 
 def should_take_next_step: (
-    [test_input] | parse | next(.seeds[0]; .maps.soil) | assert("Should take next step"; . == 81)
+    [test_input] | parse | next(.seeds[0]; .maps.soil) | assert("Should take next step"; . == { src: 81, len: 1 })
 );
 
 def should_take_next_step_for_all_seeds: (
     [test_input] | parse | .maps as $maps
-        | .seeds | map(next(.; $maps.soil)) | assert("Should take next step for all seeds"; . == [81,14,57,13])
+        | .seeds | map(next(.; $maps.soil)) | assert("Should take next step for all seeds"; . == [
+            {"src":81,"len":1},
+            {"src":14,"len":1},
+            {"src":57,"len":1},
+            {"src":13,"len":1}
+        ])
 );
 
 def should_find_locations: (
