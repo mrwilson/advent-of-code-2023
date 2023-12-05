@@ -24,7 +24,7 @@ def merge($map): (
     elif (.src + .len) > $map.src and ($map.src + $map.len) > (.src + .len) then
         [ { src: .src, len: (.src + .len - $map.src) }, { src: $map.dst, len: (.len - ($map.src - .src)) }]
     elif .src < ($map.src + $map.len) and $map.src < .src then
-        [ { src: ($map.dst + $map.len - .src), len: ($map.src + $map.len - .src) }, { src: ($map.src+$map.len), len: (.len - ($map.src + $map.len - .src)) }]
+        [ { src: ($map.dst - $map.src + .src), len: ($map.src + $map.len - .src) }, { src: ($map.src+$map.len), len: (.len - ($map.src + $map.len - .src)) }]
     else
         [.]
     end
@@ -36,21 +36,41 @@ def next($value; $map): (
     | map(. as $rule | $value | merge($rule))
     | flatten
     | if . == [] then [$value] else . end
-    | first
 );
 
 def find_locations: (
     .maps as $map
     | .seeds
-    | map(next(.;$map.soil))
-    | map(next(.;$map.fertilizer))
-    | map(next(.;$map.water))
-    | map(next(.;$map.light))
-    | map(next(.;$map.temperature))
-    | map(next(.;$map.humidity))
-    | map(next(.;$map.location))
+    | map(next(.;$map.soil)[])
+    | map(next(.;$map.fertilizer)[])
+    | map(next(.;$map.water)[])
+    | map(next(.;$map.light)[])
+    | map(next(.;$map.temperature)[])
+    | map(next(.;$map.humidity)[])
+    | map(next(.;$map.location)[])
     | map(.src)
 );
+
+
+def find_locations_recursive: (
+    .maps as $map
+    | .seeds
+    | reduce .[] as $seed({seeds:[]};
+        if .start == null then .start |= $seed
+        else .seeds += [{ src: .start.src, len: $seed.src }] | .start = null
+        end
+    )
+    | .seeds
+    | map(next(.;$map.soil)[])
+    | map(next(.;$map.fertilizer)[])
+    | map(next(.;$map.water)[])
+    | map(next(.;$map.light)[])
+    | map(next(.;$map.temperature)[])
+    | map(next(.;$map.humidity)[])
+    | map(next(.;$map.location)[])
+    | map(.src)
+);
+
 
 def part1:
     [ inputs ] | parse | find_locations | min;

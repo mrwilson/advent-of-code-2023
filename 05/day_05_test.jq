@@ -78,12 +78,12 @@ def should_parse_maps_from_input: (
 );
 
 def should_take_next_step: (
-    [test_input] | parse | next(.seeds[0]; .maps.soil) | assert("Should take next step"; . == { src: 81, len: 1 })
+    [test_input] | parse | next(.seeds[0]; .maps.soil)[] | assert("Should take next step"; . == { src: 81, len: 1 })
 );
 
 def should_take_next_step_for_all_seeds: (
     [test_input] | parse | .maps as $maps
-        | .seeds | map(next(.; $maps.soil)) | assert("Should take next step for all seeds"; . == [
+        | .seeds | map(next(.; $maps.soil)[]) | assert("Should take next step for all seeds"; . == [
             {"src":81,"len":1},
             {"src":14,"len":1},
             {"src":57,"len":1},
@@ -117,4 +117,8 @@ def should_merge_ranges_map_inside_range: (
     { "src": 0, len: 20 } | merge({ "src": 5, "dst": 100, len: 10}) | assert("Should merge ranges based on map";
         . == [{"src": 0, "len": 5 }, {"src": 100, "len": 10 }, {"src":15, "len":5 }]
     )
+);
+
+def should_find_locations_recursive: (
+  [test_input] | parse | find_locations_recursive | min | assert("Do the thing"; . == 46)
 );
