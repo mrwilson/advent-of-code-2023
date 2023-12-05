@@ -28,3 +28,6 @@ def find_locations: (
     | map(next(.;$map.humidity))
     | map(next(.;$map.location))
 );
+
+def part1:
+    [ inputs ] | parse | find_locations | min;
