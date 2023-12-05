@@ -74,3 +74,6 @@ def find_locations_recursive: (
 
 def part1:
     [ inputs ] | parse | find_locations | min;
+
+def part2:
+    error("Gave up on implementation a range-based solution. Test input fine, but real input zero-ed out");
