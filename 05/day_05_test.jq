@@ -94,3 +94,27 @@ def should_take_next_step_for_all_seeds: (
 def should_find_locations: (
     [test_input] | parse | find_locations | assert("Should take next step for all seeds"; . == [82,43,86,35])
 );
+
+def should_merge_ranges_internal: (
+    { "src": 5, len: 2 } | merge({ "src": 5, "dst": 100, len: 5}) | assert("Should merge ranges based on map";
+        . == [{"src": 100, "len": 2 }]
+    )
+);
+
+def should_merge_ranges_lower_overlap: (
+    { "src": -10, len: 20 } | merge({ "src": 0, "dst": 100, len: 20}) | assert("Should merge ranges based on map";
+        . == [{"src": -10, "len": 10 }, {"src": 100, "len": 10 }]
+    )
+);
+
+def should_merge_ranges_upper_overlap: (
+    { "src": 5, len: 10 } | merge({ "src": 0, "dst": 100, len: 10}) | assert("Should merge ranges based on map";
+        . == [{"src": 105, "len": 5 }, {"src": 10, "len": 5 }]
+    )
+);
+
+def should_merge_ranges_map_inside_range: (
+    { "src": 0, len: 20 } | merge({ "src": 5, "dst": 100, len: 10}) | assert("Should merge ranges based on map";
+        . == [{"src": 0, "len": 5 }, {"src": 100, "len": 10 }, {"src":15, "len":5 }]
+    )
+);

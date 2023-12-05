@@ -11,13 +11,32 @@ def parse: (
     }
 );
 
+
+def merge($map): (
+    if  (.src + .len) <= ($map.src + $map.len)  and .src >= $map.src then
+        [ { src: (.src + ($map.dst - $map.src)), len: .len } ]
+    elif    ($map.src + $map.len) <= (.src + .len)  and $map.src >= .src then
+        [
+            { src: .src, len: ($map.src - .src) },
+            { src: $map.dst, len: $map.len },
+            { src: ($map.src + $map.len), len: (.src + .len - ($map.src + $map.len))}
+        ]
+    elif (.src + .len) > $map.src and ($map.src + $map.len) > (.src + .len) then
+        [ { src: .src, len: (.src + .len - $map.src) }, { src: $map.dst, len: (.len - ($map.src - .src)) }]
+    elif .src < ($map.src + $map.len) and $map.src < .src then
+        [ { src: ($map.dst + $map.len - .src), len: ($map.src + $map.len - .src) }, { src: ($map.src+$map.len), len: (.len - ($map.src + $map.len - .src)) }]
+    else
+        [.]
+    end
+);
+
 def next($value; $map): (
     $map
     | filter(($value.src + $value.len) <= .src or (.src + .len) <= $value.src | not)
+    | map(. as $rule | $value | merge($rule))
+    | flatten
+    | if . == [] then [$value] else . end
     | first
-    | if . == null then $value else {
-            src: (.dst + $value.src - .src), len: $value.len
-        } end
 );
 
 def find_locations: (
