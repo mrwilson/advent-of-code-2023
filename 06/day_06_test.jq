@@ -13,3 +13,7 @@ def should_parse_input: (
         [30, 200]
     ])
 );
+
+def should_calculate_rounded_quadratic_roots: (
+    [7, 9] | roots | assert("Should parse input"; . == [2, 5])
+);
