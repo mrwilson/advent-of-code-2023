@@ -13,3 +13,6 @@ def roots: (
 def ways_to_win: (
     map(roots | last - first + 1) | reduce .[] as $way (1; . * $way)
 );
+
+def part1:
+    [ inputs ] | parse | ways_to_win;
