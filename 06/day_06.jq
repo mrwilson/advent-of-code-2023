@@ -2,6 +2,10 @@ def parse: (
     map(split(": +"; null) | last | split(" +"; null) | map(tonumber)) | transpose
 );
 
+def parse_part_2: (
+    map(split(": +"; null) | last | gsub(" "; "") | tonumber)
+);
+
 def roots: (
     first as $b | last as $c
     | ($b*$b - 4*$c)

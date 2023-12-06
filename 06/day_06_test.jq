@@ -21,3 +21,7 @@ def should_calculate_rounded_quadratic_roots: (
 def should_calculate_ways_to_win: (
     [ test_input ] | parse | ways_to_win | assert("Should multiply ways to win"; . == 4 * 8 * 9)
 );
+
+def should_parse_input_for_part_2: (
+    [ test_input ] | parse_part_2 | assert("Should parse input for part 2"; . == [71530,940200])
+);
