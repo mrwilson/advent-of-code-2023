@@ -20,3 +20,6 @@ def ways_to_win: (
 
 def part1:
     [ inputs ] | parse | ways_to_win;
+
+def part2:
+    [inputs] | [parse_part_2] | ways_to_win;
