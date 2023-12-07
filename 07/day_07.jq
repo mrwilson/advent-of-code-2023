@@ -21,7 +21,11 @@ def sort_hand: (
 );
 
 def score_hands: (
-    map(parse) | sort_by(sort_hand)
+    sort_by(sort_hand)
     | reduce .[] as $hand ([1, 0]; [first + 1, last + (first * $hand.bid)])
     | last
+);
+
+def part1: (
+    [ inputs ] | map(parse) | score_hands
 );
