@@ -67,3 +67,7 @@ def should_rank_hands_for_test_input: (
         [12,12,12,11,14]
     ])
 );
+
+def should_score_bids_for_all_hands: (
+    [ test_input ] | score_hands | assert("Should score hands with bids"; . == 6440)
+);

@@ -19,3 +19,9 @@ def sort_hand: (
         elif $unique_cards == 1 then [7] + .original_hand
     else error("Not implemented") end
 );
+
+def score_hands: (
+    map(parse) | sort_by(sort_hand)
+    | reduce .[] as $hand ([1, 0]; [first + 1, last + (first * $hand.bid)])
+    | last
+);
