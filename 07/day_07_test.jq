@@ -1,6 +1,14 @@
 include "assert";
 include "day_07";
 
+def test_input: (
+    "32T3K 765",
+    "T55J5 684",
+    "KK677 28",
+    "KTJJT 220",
+    "QQQJA 483"
+);
+
 def should_parse_out_hand: (
     "32T3K 765" | parse | assert("Should parse into structure"; . == {
         bid: 765,
@@ -47,4 +55,15 @@ def should_return_sort_information__four_of_a_kind: (
 def should_return_sort_information__five_of_a_kind: (
     "33333 0" | parse | sort_hand
     | assert("Should provide sort information :: five of a kind"; . == [7,3,3,3,3,3])
+);
+
+def should_rank_hands_for_test_input: (
+    [ test_input ] | map(parse) | sort_by(sort_hand) | map(.original_hand)
+    | assert("Should rank hands using score"; . == [
+        [3,2,10,3,13],
+        [13,10,11,11,10],
+        [13,13,6,7,7],
+        [10,5,5,11,5],
+        [12,12,12,11,14]
+    ])
 );
