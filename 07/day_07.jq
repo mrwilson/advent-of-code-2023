@@ -9,3 +9,11 @@ def parse: (
         | add
     )
 );
+
+def sort_hand: (
+    (.hand | length) as $unique_cards
+    | if
+        $unique_cards == 5 then [1, (.hand | map(.card) | max) ]
+
+    else error("Not implemented") end
+);
