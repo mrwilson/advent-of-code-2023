@@ -8,6 +8,17 @@ def parse($part): (
     | .hand = (.original_hand | group_by(.) | map([{card: first, count: length}]) | add)
 );
 
+def upgrade_rank_with_jokers: (
+    first as $original_rank
+    | last as $jokers
+    |   if $original_rank == 3 and $jokers == 1 then 4          # 2 pair -> full house
+        elif $original_rank == 3 and $jokers == 2 then 5        # 2 pair -> 4 of a kind
+        elif (5 <= $original_rank and $original_rank <= 7) then 7 # Full house, 4 of a kind, 5 of a kind
+        elif $jokers == 0 then $original_rank
+        else $original_rank + 1
+        end
+);
+
 def sort_hand($part): (
     (.hand | length) as $unique_cards
     | .original_hand as $hand

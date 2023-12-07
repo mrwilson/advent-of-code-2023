@@ -80,3 +80,22 @@ def should_parse_j_as_joker: (
 def should_score_bids_for_all_hands_part_2: (
     [ test_input ] | map(parse(2)) | score_hands(2) | assert("Should score hands with bids"; . == 5905)
 );
+
+def should_upgrade_hands_with_jokers: (
+    [
+        [1, 0], # No jokers
+        [1, 1], # High card
+        [2, 1], # 1 Pair, J is not in the pair
+        [2, 2], # 1 Pair, J is in the pair
+        [3, 1], # 2 Pair, J is not in a pair
+        [3, 2], # 2 Pair, J is in a pair
+        [4, 1], # 3 of a kind, J is not in the 3
+        [4, 3], # 3 of a kind, J is in the 3
+        [5, 2], [5, 3], # Full house, doesn't matter which pair
+        [6, 1], [6, 4], # 4 of a kind, doesn't matter which is a J
+        [7, 5] # Only one way it can go
+    ] | map(upgrade_rank_with_jokers) | assert("Should remap hand ranks based on number of jokers"; . == [
+        1, 2, 3, 3, 4, 5, 5, 5, 7, 7, 7, 7, 7
+    ])
+
+);
