@@ -74,7 +74,7 @@ def should_score_bids_for_all_hands: (
 
 def should_parse_j_as_joker: (
     [test_input] | map(parse(2)) | map(sort_hand(2) | first)
-    | assert("Should parse jokers as lowest value"; . == [2,5,3,5,5])
+    | assert("Should parse jokers as lowest value"; . == [2,6,3,6,6])
 );
 
 def should_score_bids_for_all_hands_part_2: (
@@ -95,7 +95,7 @@ def should_upgrade_hands_with_jokers: (
         [6, 1], [6, 4], # 4 of a kind, doesn't matter which is a J
         [7, 5] # Only one way it can go
     ] | map(upgrade_rank_with_jokers) | assert("Should remap hand ranks based on number of jokers"; . == [
-        1, 2, 3, 3, 4, 5, 5, 5, 7, 7, 7, 7, 7
+        1,2,4,4,5,6,6,6,7,7,7,7,7
     ])
 
 );

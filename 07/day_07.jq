@@ -11,10 +11,12 @@ def parse($part): (
 def upgrade_rank_with_jokers: (
     first as $original_rank
     | last as $jokers
-    |   if $original_rank == 3 and $jokers == 1 then 4          # 2 pair -> full house
-        elif $original_rank == 3 and $jokers == 2 then 5        # 2 pair -> 4 of a kind
+    |   if $jokers == 0 then $original_rank
+        elif $original_rank == 2 then 4
+        elif $original_rank == 3 and $jokers == 1 then 5        # 2 pair -> full house
+        elif $original_rank == 3 and $jokers == 2 then 6        # 2 pair -> 4 of a kind
+        elif $original_rank == 4 then 6
         elif (5 <= $original_rank and $original_rank <= 7) then 7 # Full house, 4 of a kind, 5 of a kind
-        elif $jokers == 0 then $original_rank
         else $original_rank + 1
         end
 );
@@ -30,7 +32,8 @@ def sort_hand($part): (
         elif $unique_cards == 2 and (.hand | map(.count) | max) == 4 then [6] + .original_hand
         elif $unique_cards == 1 then [7] + .original_hand
     else error("Not implemented") end
-    | .[0] += (if $part == 1 then 0 else ($hand | filter(. == -1) | length) end)
+    | .[0] = (if $part == 1 then first else [first, ($hand | filter(. == -1) | length)] | upgrade_rank_with_jokers end)
+
 );
 
 def score_hands($part): (
@@ -41,4 +44,8 @@ def score_hands($part): (
 
 def part1: (
     [ inputs ] | map(parse(1)) | score_hands(1)
+);
+
+def part2: (
+    [ inputs ] | map(parse(2)) | score_hands(2)
 );
