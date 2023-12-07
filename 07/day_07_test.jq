@@ -16,3 +16,7 @@ def should_parse_out_hand: (
 def should_return_sort_information__high_card: (
     "23456 0" | parse | sort_hand | assert("Should provide sort information :: high card"; . == [ 1, 6 ])
 );
+
+def should_return_sort_information__one_pair: (
+    "52354 0" | parse | sort_hand | assert("Should provide sort information :: one pair"; . == [2, 5])
+);
