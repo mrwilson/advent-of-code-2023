@@ -43,3 +43,8 @@ def should_return_sort_information__four_of_a_kind: (
     "23333 0" | parse | sort_hand
     | assert("Should provide sort information :: four of a kind"; . == [6,2,3,3,3,3])
 );
+
+def should_return_sort_information__five_of_a_kind: (
+    "33333 0" | parse | sort_hand
+    | assert("Should provide sort information :: five of a kind"; . == [7,3,3,3,3,3])
+);
