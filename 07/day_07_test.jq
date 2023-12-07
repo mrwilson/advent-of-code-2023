@@ -23,3 +23,8 @@ def should_return_sort_information__one_pair: (
     "52354 0" | parse | sort_hand
     | assert("Should provide sort information :: one pair"; . == [2,5,2,3,5,4])
 );
+
+def should_return_sort_information__two_pair: (
+    "23432 0" | parse | sort_hand
+    | assert("Should provide sort information :: one pair"; . == [3,2,3,4,3,2])
+);

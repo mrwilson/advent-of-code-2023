@@ -12,6 +12,7 @@ def sort_hand: (
     (.hand | length) as $unique_cards
     |   if $unique_cards == 5 then [1] + .original_hand
         elif $unique_cards == 4 then [2] + .original_hand
+        elif $unique_cards == 3 then [3] + .original_hand
 
     else error("Not implemented") end
 );
