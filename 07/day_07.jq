@@ -14,7 +14,8 @@ def sort_hand: (
         elif $unique_cards == 4 then [2] + .original_hand
         elif $unique_cards == 3 and (.hand | map(.count) | max) == 2 then [3] + .original_hand
         elif $unique_cards == 3 and (.hand | map(.count) | max) == 3 then [4] + .original_hand
-        elif $unique_cards == 2 then [5] + .original_hand
+        elif $unique_cards == 2 and (.hand | map(.count) | max) == 3 then [5] + .original_hand
+        elif $unique_cards == 2 and (.hand | map(.count) | max) == 4 then [6] + .original_hand
 
     else error("Not implemented") end
 );
