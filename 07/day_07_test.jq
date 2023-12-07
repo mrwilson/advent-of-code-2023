@@ -76,3 +76,7 @@ def should_parse_j_as_joker: (
     [test_input] | map(parse(2)) | map(sort_hand(2) | first)
     | assert("Should parse jokers as lowest value"; . == [2,5,3,5,5])
 );
+
+def should_score_bids_for_all_hands_part_2: (
+    [ test_input ] | map(parse(2)) | score_hands(2) | assert("Should score hands with bids"; . == 5905)
+);
