@@ -29,3 +29,15 @@ def should_parse_map_from_input: (
         "ZZZ": ["ZZZ", "ZZZ"]
     })
 );
+
+def should_refine_network_based_on_instructions: (
+    [ test_input ] | parse | refine_network | assert("Should parse instructions out of input"; .network == {
+        "AAA": "ZZZ",
+        "BBB": "EEE",
+        "CCC": "GGG",
+        "DDD": "DDD",
+        "EEE": "EEE",
+        "GGG": "GGG",
+        "ZZZ": "ZZZ",
+    })
+);
