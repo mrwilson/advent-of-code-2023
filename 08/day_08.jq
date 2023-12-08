@@ -11,12 +11,12 @@ def refine_network: (
     | { instructions: $instructions, network: add }
 );
 
-def source_to_sink: (
+def source_to_sink($starts; $terminals): (
     .network as $network
-    | ["AAA"]
-    | until(last == "ZZZ"; . + [$network[last]])
+    | $starts
+    | map([.] | until([last] | inside($terminals); . + [$network[last]]))
 );
 
 def part1: (
-    [ inputs ] | parse | refine_network | [(source_to_sink | length - 1), (.instructions | length)] | first * last
+    [ inputs ] | parse | refine_network | [(source_to_sink(["AAA"]; ["ZZZ"]) | first | length - 1), (.instructions | length)] | first * last
 );

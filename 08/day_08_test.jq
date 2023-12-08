@@ -63,13 +63,13 @@ def should_refine_network_based_on_instructions: (
 );
 
 def should_find_journey_from_source_to_sink: (
-    [ test_input ] | parse | refine_network | source_to_sink | assert("Should find the root from AAA to ZZZ"; . ==
+    [ test_input ] | parse | refine_network | source_to_sink(["AAA"]; ["ZZZ"]) | first | assert("Should find the root from AAA to ZZZ"; . ==
         ["AAA", "ZZZ"]
     )
 );
 
 def should_find_journey_from_source_to_sink_input_2: (
-    [ test_input_2 ] | parse | refine_network | source_to_sink | assert("Should find the root from AAA to ZZZ"; . ==
+    [ test_input_2 ] | parse | refine_network | source_to_sink(["AAA"]; ["ZZZ"]) | first | assert("Should find the root from AAA to ZZZ"; . ==
         ["AAA", "BBB", "ZZZ"]
     )
 );
