@@ -15,5 +15,8 @@ def source_to_sink: (
     .network as $network
     | ["AAA"]
     | until(last == "ZZZ"; . + [$network[last]])
+);
 
+def part1: (
+    [ inputs ] | parse | refine_network | [(source_to_sink | length - 1), (.instructions | length)] | first * last
 );
