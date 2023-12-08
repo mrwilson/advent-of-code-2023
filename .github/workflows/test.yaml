@@ -20,4 +20,6 @@ jobs:
           path: ./jqunit
       - run: RUSTFLAGS=-Awarnings cargo install --path .
         working-directory: ./jqunit
-      - run: jqunit --libraries *
+      - run: |
+          jqunit --libraries .
+          jqunit --libraries *
