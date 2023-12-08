@@ -73,3 +73,7 @@ def should_find_journey_from_source_to_sink_input_2: (
         ["AAA", "BBB", "ZZZ"]
     )
 );
+
+def should_find_distance_from_source_to_sink_in_parallel: (
+    [ test_input_3 ] | parse | refine_network | ghost_source_to_sink | assert("Should find parallel roots from sources to terminals"; . == [2, 6])
+);
