@@ -13,6 +13,13 @@ def test_input: (
     "ZZZ = (ZZZ, ZZZ)"
 );
 
+def test_input_2: (
+    "LLR",
+    "",
+    "AAA = (BBB, BBB)",
+    "BBB = (AAA, ZZZ)",
+    "ZZZ = (ZZZ, ZZZ)"
+);
 
 def should_parse_instructions_from_input: (
     [ test_input ] | parse | assert("Should parse instructions out of input"; .instructions == [1,0])
@@ -40,4 +47,16 @@ def should_refine_network_based_on_instructions: (
         "GGG": "GGG",
         "ZZZ": "ZZZ",
     })
+);
+
+def should_find_journey_from_source_to_sink: (
+    [ test_input ] | parse | refine_network | source_to_sink | assert("Should find the root from AAA to ZZZ"; . ==
+        ["AAA", "ZZZ"]
+    )
+);
+
+def should_find_journey_from_source_to_sink_input_2: (
+    [ test_input_2 ] | parse | refine_network | source_to_sink | assert("Should find the root from AAA to ZZZ"; . ==
+        ["AAA", "BBB", "ZZZ"]
+    )
 );

@@ -9,5 +9,11 @@ def refine_network: (
     | .network | keys
     | map(. as $node | reduce $instructions[] as $step (.; $network[.][$step]) | { "\($node)": . })
     | { instructions: $instructions, network: add }
+);
+
+def source_to_sink: (
+    .network as $network
+    | ["AAA"]
+    | until(last == "ZZZ"; . + [$network[last]])
 
 );
