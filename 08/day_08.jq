@@ -35,4 +35,5 @@ def part2: (
     | parse
     | refine_network
     | ghost_source_to_sink
+    | reduce .[] as $steps(1; (. * $steps)/gcd(.; $steps))
 );
