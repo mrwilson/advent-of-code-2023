@@ -10,6 +10,10 @@ def double_empty_space: (
 
 def expand: double_empty_space | transpose | double_empty_space | transpose;
 
+def empty_lines: (
+    [., transpose] | map(map(all(. == 0)) | indices(true))
+);
+
 def distances_between_galaxies: (
     [paths(numbers == 1)] as $galaxies
     | [range(0; ($galaxies | length))]
