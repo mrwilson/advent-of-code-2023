@@ -4,12 +4,6 @@ def parse: (
     map(./"" | map(if . == "." then 0 else 1 end))
 );
 
-def double_empty_space: (
-    reduce .[] as $row ([]; if ($row | all(. == 0)) then . + [$row] + [$row] else . + [$row] end)
-);
-
-def expand: double_empty_space | transpose | double_empty_space | transpose;
-
 def empty_lines: (
     [., transpose] | map(map(all(. == 0)) | indices(true))
 );
@@ -31,5 +25,5 @@ def distances_between_galaxies($growth): (
 );
 
 def part1: (
-    [inputs] | parse | expand | distances_between_galaxies(1)
+    [inputs] | parse | distances_between_galaxies(1)
 );

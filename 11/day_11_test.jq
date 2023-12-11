@@ -29,14 +29,6 @@ def should_parse_input: (
     ])
 );
 
-def should_double_empty_space__rows: (
-    [ test_input ] | parse | expand | assert("Should increase size of grid"; length == 12)
-);
-
-def should_double_empty_space__columns: (
-    [ test_input ] | parse | expand | transpose | assert("Should increase size of grid"; length == 13)
-);
-
 def should_find_empty_lines: (
     [ test_input ] | parse | empty_lines | assert("Should find empty lines"; . == [
         [3, 7],
