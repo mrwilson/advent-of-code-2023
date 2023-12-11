@@ -26,3 +26,8 @@ def should_find_next_number: (
     [ test_input | parse ] | map(next_number)
     | assert("Should find point where all differences are equal"; . == [18,28,68])
 );
+
+def should_find_previous_number: (
+    [ test_input | parse ] | map(previous_number)
+    | assert("Should find previous numbers"; . == [-3,0,5])
+);
