@@ -47,3 +47,15 @@ def should_get_distances_between_galaxies: (
     | distances_between_galaxies(1)
     | assert("Should find distances between galaxies"; . == 374)
 );
+
+def should_get_distances_between_galaxies__expand_10: (
+    [ test_input ] | parse
+    | distances_between_galaxies(9)
+    | assert("Should find distances between galaxies"; . == 1030)
+);
+
+def should_get_distances_between_galaxies__expand_100: (
+    [ test_input ] | parse
+    | distances_between_galaxies(99)
+    | assert("Should find distances between galaxies"; . == 8410)
+);
