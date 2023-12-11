@@ -21,8 +21,8 @@ def expand_space($growth; $space): (
     ])
 );
 
-def distances_between_galaxies: (
-    [paths(numbers == 1)] as $galaxies
+def distances_between_galaxies($growth): (
+    expand_space($growth ; empty_lines) as $galaxies
     | [range(0; ($galaxies | length))]
     | [combinations(2)]
     | filter(first != last)
@@ -31,5 +31,5 @@ def distances_between_galaxies: (
 );
 
 def part1: (
-    [inputs] | parse | expand | distances_between_galaxies
+    [inputs] | parse | expand | distances_between_galaxies(1)
 );

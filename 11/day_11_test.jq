@@ -52,7 +52,6 @@ def should_expand_space: (
 
 def should_get_distances_between_galaxies: (
     [ test_input ] | parse
-    | expand
-    | distances_between_galaxies
+    | distances_between_galaxies(1)
     | assert("Should find distances between galaxies"; . == 374)
 );
