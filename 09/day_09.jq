@@ -6,9 +6,7 @@ def descend: (
 
 def next_number: descend | map(last) | add;
 
-def previous_number: (
-    descend | map(first) | reduce .[] as $entry ([0,1] ; [ first+(last*$entry), last*-1]) | first
-);
+def previous_number: reverse | descend | map(last) | add;
 
 def part1: [ inputs | parse ] | map(next_number) | add;
 
