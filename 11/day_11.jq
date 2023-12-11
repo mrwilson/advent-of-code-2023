@@ -18,3 +18,7 @@ def distances_between_galaxies: (
     | map([$galaxies[first], $galaxies[last]] | transpose | map(first - last | abs) | add)
     | add/2
 );
+
+def part1: (
+    [inputs] | parse | expand | distances_between_galaxies
+);
