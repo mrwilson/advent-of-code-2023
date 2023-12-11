@@ -11,3 +11,5 @@ def previous_number: (
 );
 
 def part1: [ inputs | parse ] | map(next_number) | add;
+
+def part2: [ inputs | parse ] | map(previous_number) | add;
