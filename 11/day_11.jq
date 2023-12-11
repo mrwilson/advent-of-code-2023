@@ -27,3 +27,7 @@ def distances_between_galaxies($growth): (
 def part1: (
     [inputs] | parse | distances_between_galaxies(1)
 );
+
+def part2: (
+    [inputs] | parse | distances_between_galaxies(1000000-1)
+);
