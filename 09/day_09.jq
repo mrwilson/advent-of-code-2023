@@ -5,3 +5,5 @@ def descend: (
 );
 
 def next_number: descend | map(last) | add;
+
+def part1: [ inputs | parse ] | map(next_number) | add;
