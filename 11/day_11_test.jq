@@ -44,6 +44,12 @@ def should_find_empty_lines: (
     ])
 );
 
+def should_expand_space: (
+    [ test_input ] | parse | expand_space(1 ; empty_lines) | assert("Should expand space"; . == [
+        [0,4],[1,9],[2,0],[5,8],[6,1],[7,12],[10,9],[11,0],[11,5]
+    ])
+);
+
 def should_get_distances_between_galaxies: (
     [ test_input ] | parse
     | expand

@@ -14,6 +14,13 @@ def empty_lines: (
     [., transpose] | map(map(all(. == 0)) | indices(true))
 );
 
+def expand_space($growth; $space): (
+    [paths(numbers == 1)] | map([
+        (first as $x | $x + ($space[0] | filter(. < $x) | length)*$growth),
+        (last as $y  | $y + ($space[1] | filter(. < $y) | length)*$growth)
+    ])
+);
+
 def distances_between_galaxies: (
     [paths(numbers == 1)] as $galaxies
     | [range(0; ($galaxies | length))]
