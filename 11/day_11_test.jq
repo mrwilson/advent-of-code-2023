@@ -30,9 +30,16 @@ def should_parse_input: (
 );
 
 def should_double_empty_space__rows: (
-    [ test_input ] | parse | double_empty_space | assert("Should increase size of grid"; length == 12)
+    [ test_input ] | parse | expand | assert("Should increase size of grid"; length == 12)
 );
 
 def should_double_empty_space__columns: (
-    [ test_input ] | parse | transpose | double_empty_space | assert("Should increase size of grid"; length == 13)
+    [ test_input ] | parse | expand | transpose | assert("Should increase size of grid"; length == 13)
+);
+
+def should_get_distances_between_galaxies: (
+    [ test_input ] | parse
+    | expand
+    | distances_between_galaxies
+    | assert("Should find distances between galaxies"; . == 374)
 );
